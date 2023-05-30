@@ -30,7 +30,7 @@ function Premium() {
       title: 'Payment was successful',
       time: 5000,
     });
-    window.location.replace("/AskQuestion")
+    
   };
   const handleFailure = () => {
     MySwal.fire({

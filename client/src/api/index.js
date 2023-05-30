@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const API = axios.create({
-  baseURL: "https://stack-overflow-protyush-main.onrender.com",
+  baseURL: "https://stack-overflow-protyush-clone.onrender.com",
 });
 
 API.interceptors.request.use((req) => {

@@ -1,6 +1,6 @@
 .user-details-container {
   width: 100%;
-  margin-top: 50px;
+  margin-top: 20px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -9,6 +9,13 @@
 .user-details {
   display: flex;
   align-items: flex-start;
+}
+.follow-button {
+  background: #f5f7f9;
+  padding: 6px 18px;
+  border: 1px solid #ddd;
+  font-size: 0.8rem;
+  cursor: pointer;
 }
 
 .user-name {
@@ -78,4 +85,106 @@
   border: none;
   margin-left: 10px;
   cursor: pointer;
+}
+.user-bio {
+  font-size: 0.9rem;
+}
+
+.Avatar {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  background: rgb(232, 116, 54);
+  color: #fff;
+}
+
+.user-profile-bio-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.user-profile-bio-sidebar {
+  padding: 0 5px;
+  display: flex;
+}
+.user-profile-bio-sidebar span {
+  font-size: 0.8rem;
+  padding: 8px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.user-profile-bio-sidebar .active-span {
+  background: rgb(248, 163, 72);
+  color: #fff;
+}
+.user-profile-bio-container .user-tags {
+  margin-top: 20px;
+}
+
+.user-post {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+.post img,
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+.post {
+  border: 1px solid #ddd;
+}
+.user-post p {
+  font-size: 0.8rem;
+  padding: 0 10px;
+  line-height: 130%;
+  max-height: 300px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+  .user-details-container {
+    padding: 0 20px;
+  }
+  .user-profile-bio-sidebar {
+    padding: 0 20px;
+  }
+  .user-post {
+    padding: 0 20px;
+  }
+  .user-bio-section {
+    padding: 20px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .user-details-container {
+    padding: 0 10px;
+  }
+  .user-profile-bio-sidebar {
+    padding: 0 10px;
+  }
+  .user-post {
+    padding: 0px;
+  }
+  .user-bio-section {
+    padding: 10px;
+  }
+  .Avatar {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    background: rgb(232, 116, 54);
+    color: #fff;
+  }
 }

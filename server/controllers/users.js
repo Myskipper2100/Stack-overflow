@@ -1,41 +1,75 @@
-import mongoose from "mongoose";
 import users from "../models/auth.js";
 
 export const getAllUsers = async (req, res) => {
   try {
-    const allUsers = await users.find();
-    const allUserDetails = [];
-    allUsers.forEach((user) => {
-      allUserDetails.push({
-        _id: user._id,
-        name: user.name,
-        about: user.about,
-        tags: user.tags,
-        joinedOn: user.joinedOn,
-      });
-    });
-    res.status(200).json(allUserDetails);
+    const allUsers = await users.find().sort({ createdAt: -1 });
+    res.status(200).json(allUsers);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
 };
 
 export const updateProfile = async (req, res) => {
-  const { id: _id } = req.params;
-  const { name, about, tags } = req.body;
-
-  if (!mongoose.Types.ObjectId.isValid(_id)) {
-    return res.status(404).send("question unavailable...");
+  if (req.params.id === req.userId) {
+    try {
+      const updatedProfile = await users.findByIdAndUpdate(
+        req.params.id,
+        { $set: req.body },
+        { new: true }
+      );
+      res.status(200).json(updatedProfile);
+    } catch (error) {
+      res.status(405).json({ message: error.message });
+    }
   }
+};
 
+export const follow = async (req, res) => {
+  const currentUserId = req.userId;
+  const friendId = req.params.id;
   try {
-    const updatedProfile = await users.findByIdAndUpdate(
-      _id,
-      { $set: { name: name, about: about, tags: tags } },
+    const updatedUser = await users.findByIdAndUpdate(
+      currentUserId,
+      {
+        $addToSet: { followings: friendId },
+      },
       { new: true }
     );
-    res.status(200).json(updatedProfile);
+    await users.findByIdAndUpdate(
+      friendId,
+      {
+        $addToSet: { followers: currentUserId },
+      },
+      { new: true }
+    );
+    const { password, ...user_data } = updatedUser._doc;
+    res.status(200).json(user_data);
   } catch (error) {
-    res.status(405).json({ message: error.message });
+    res.status(500).json(error);
+  }
+};
+
+export const unfollow = async (req, res) => {
+  const currentUserId = req.userId;
+  const friendId = req.params.id;
+  try {
+    const updatedUser = await users.findByIdAndUpdate(
+      currentUserId,
+      {
+        $pull: { followings: friendId },
+      },
+      { new: true }
+    );
+    await users.findByIdAndUpdate(
+      friendId,
+      {
+        $pull: { followers: currentUserId },
+      },
+      { new: true }
+    );
+    const { password, ...user_data } = updatedUser._doc;
+    res.status(200).json(user_data);
+  } catch (error) {
+    res.status(500).json(error);
   }
 };

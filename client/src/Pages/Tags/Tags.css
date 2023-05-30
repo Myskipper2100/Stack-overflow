@@ -34,3 +34,16 @@
   color: #323232;
   line-height: 17px;
 }
+
+@media screen and (max-width: 900px) {
+  .tags-h1,
+  .tags-p {
+    padding: 0 20px;
+  }
+  .tags-list-container {
+    padding: 20px;
+  }
+  .home-container-2 {
+    padding-top: 0;
+  }
+}

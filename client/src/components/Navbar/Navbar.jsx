@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import decode from "jwt-decode";
 import { HiBars3 } from "react-icons/hi2";
@@ -15,7 +15,7 @@ import { setCurrentUser } from "../../actions/currentUser";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const location= useLocation()
+
 
   const User = useSelector((state) => state.currentUserReducer);
   const sidebar = useSelector((state) => state.sideBar);

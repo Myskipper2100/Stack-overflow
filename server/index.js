@@ -56,7 +56,7 @@ mongoose
     let status, error;
     const { token, amount } = req.body;
     try {
-      await Stripe.charges.create({
+      await Stripe.paymentIntents.create({
         source: token.id,
         amount,
         currency: 'INR',

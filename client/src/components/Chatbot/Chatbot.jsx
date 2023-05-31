@@ -85,7 +85,7 @@ function Chatbot({ setBotIsOpen }) {
 
   return (
     <div className="App">
-      <div style={{ position:"absolute",top:"70px", left:"70px",height: "600px", width: "400px"  }}>
+      <div style={{ position:"absolute",top:"70px", left:"60px",height: "600px", width: "400px"  }}>
         <MainContainer>
           <ChatContainer>       
             <MessageList 

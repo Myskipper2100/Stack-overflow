@@ -63,6 +63,19 @@
   }
 }
 
+.upg1{
+  background-color: #edca96;
+  text-decoration: none;
+  color: #3a3a3a;
+  display: flex;
+  border-radius: 40px;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 10px;
+  transition: 0.2s;
+  border: none;
+}
+
 @media screen and (max-width: 700px) {
   .add-list-item {
     display: flex;

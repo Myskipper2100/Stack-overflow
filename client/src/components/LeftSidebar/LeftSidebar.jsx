@@ -1,14 +1,33 @@
 import React from "react";
 import "./LeftSidebar.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Globe from "../../assets/Globe.svg";
 import { useDispatch, useSelector } from "react-redux";
 
 const LeftSidebar = () => {
+
+  const User = useSelector((state) => state.currentUserReducer);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const sidebar = useSelector((state) => state.sideBar);
   const toggleSideBar = () => {
     dispatch({ type: "TOGGLE_SIDEBAR", payload: false });
+  };
+
+
+  const checkAuth=() =>{
+    if(User===null){
+      alert("login or signup to upgrade to pemium")
+      navigate('/Auth')
+    }else{
+      navigate("/Premium")
+    }
+  };
+
+  const multiple=()=>{
+    checkAuth();
+    toggleSideBar();
+
   };
   return (
     <div
@@ -90,6 +109,14 @@ const LeftSidebar = () => {
         >
           <p>Community</p>
         </NavLink>
+        <button
+          onClick={multiple}
+          className="upg1"
+          activeclassname="active"
+          
+        >
+          <p>Upgrade</p>
+        </button>
       </nav>
     </div>
   );

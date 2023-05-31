@@ -1,5 +1,5 @@
 import "./Premium.css";
-
+import { useNavigate} from 'react-router-dom';
 
 import StripeCheckout from 'react-stripe-checkout';
 import React, { useState } from 'react';
@@ -13,8 +13,12 @@ const MySwal = withReactContent(Swal);
 
 function Premium() {
   
+  const navigate = useNavigate();
 
-
+  const navigateToHome = () => {
+    
+    navigate('/');
+  };
 
   const publishableKey =
   'pk_test_51NCmmnSA5EzUw4rHhg1n9cZG7Qmc0bwPkpSfK6yVzwv4BvD4tuYnwbFHCmu1mkUY6smYTCUdoyzKbN2Vr0Z5GOOh002BXbhWFC';
@@ -22,8 +26,8 @@ function Premium() {
     name: 'Gold',
     price: 1000,
   });
-  const priceForStripe = product.price * 100;
 
+  const priceForStripe = product.price * 100;
   const handleSuccess = () => {
     MySwal.fire({
       icon: 'success',
@@ -45,7 +49,7 @@ function Premium() {
         url: 'http://localhost:5000/payment',
         method: 'post',
         data: {
-          amount: product.price * 100,
+          amount: product.price,
           token,
         },
       });
@@ -60,60 +64,67 @@ function Premium() {
 
   
   return (
-    <div>
-    <div class="columns">
-  <ul class="price">
-    <li class="header">Basic</li>
-    <li class="grey">₹ 0 / month</li>
-    <li>1 QUSTIONS PER DAY</li>
-    <li>test_feature</li>
-    <li>test_feature</li>
-    
-    <li class="grey"><a href="/AskQuestion" class="button">Go Free</a></li>
-  </ul>
-</div>
-<div class="columns">
-  <ul class="price">
-    <li class="header">Silver</li>
-    <li class="grey">₹ 100  / month</li>
-    <li>5 QUSTIONS PER DAY</li>
-    <li>test_feature</li>
-    <li>test_feature</li>
-    <li class="grey"><StripeCheckout
+ 
+<body>
+    <div class="container">
+        <h2>Select Your Plan</h2>
+        <div class="price-row">
+            <div class="price-col">
+                <p>Basic</p>
+                <h3>0 Rs <span>/month</span></h3>
+                <ul>
+                    <li>1 question per day</li>
+                    <li>test_feature</li>
+                    <li>test_feature</li>
+                    
+                </ul>
+                <button onClick={navigateToHome} >Go Free</button>
+            </div>
+            <div class="price-col">
+                <p>Silver</p>
+                <h3>100 Rs <span>/month</span></h3>
+                <ul>
+                    <li>5 question per day</li>
+                    <li>test_feature</li>
+                    <li>test_feature</li>
+                    
+                </ul>
+                <StripeCheckout class="abs"
         stripeKey={publishableKey}
         label="Pay Now"
         name="Pay With Credit Card"
         billingAddress
         shippingAddress
         amount={priceForStripe}
-        description={`Your total is ${product.price}`
-        }
+        description={`Your total is ₹${product.price}`}
         token={payNow}
-      /></li>
-  </ul>
-  </div>
-  <div class="columns">
-  <ul class="price">
-    <li class="header">Gold</li>
-    <li class="grey">₹ 1000 / month</li>
-    <li>UNLIMITED QUESTIONS</li>
-    <li>test_feature</li>
-    <li>test_feature</li>
-    
-    <li class="grey"><StripeCheckout
+        />
+            </div>
+            <div class="price-col">
+                <p>Gold</p>
+                <h3>1000 Rs <span>/month</span></h3>
+                <ul>
+                    <li>Unlimited questions</li>
+                    <li>test_feature</li>
+                    <li>test_feature</li>
+                    
+                </ul>
+                <StripeCheckout class="abs"
         stripeKey={publishableKey}
         label="Pay Now"
         name="Pay With Credit Card"
         billingAddress
         shippingAddress
         amount={priceForStripe}
-        description={`Your total is ${product.price}`
-        }
+        description={`Your total is ₹${product.price}`}
         token={payNow}
-      /></li>
-  </ul>
-  </div>
-  </div>
+        />
+        
+            </div>
+        </div>
+    </div>
+</body>
+
   );
 }
 

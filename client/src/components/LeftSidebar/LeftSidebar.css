@@ -75,6 +75,9 @@
   transition: 0.2s;
   border: none;
 }
+.upg1:hover{
+  cursor: pointer;
+}
 
 @media screen and (max-width: 700px) {
   .add-list-item {

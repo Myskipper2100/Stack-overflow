@@ -1,6 +1,6 @@
 import { BsFillShieldLockFill, BsTelephoneFill } from "react-icons/bs";
 import { CgSpinner } from "react-icons/cg";
-
+import { useNavigate} from 'react-router-dom';
 import OtpInput from "otp-input-react";
 import { useState } from "react";
 import PhoneInput from "react-phone-input-2";
@@ -10,7 +10,13 @@ import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { toast, Toaster } from "react-hot-toast";
 import "./Otp.css"
 
-const App = () => {
+const Otp = () => {
+  const navigate = useNavigate();
+
+  const navigateAsk = () => {
+    
+    navigate('/AskQuestion');
+  };
   const [otp, setOtp] = useState("");
   const [ph, setPh] = useState("");
   const [loading, setLoading] = useState(false);
@@ -75,10 +81,14 @@ const App = () => {
         <Toaster toastOptions={{ duration: 4000 }} />
         <div id="recaptcha-container"></div>
         {user ? (
-          window.location.replace("/AskQuestion"),
+          
           <h2 className="text-center">
             👍Login Success
+            <button  className="ask1" onClick={navigateAsk}>Ask Question</button>
+            
           </h2>
+
+
         ) : (
           <div className="w-80">
             <h1 className="tx2">
@@ -144,4 +154,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Otp;

@@ -13,7 +13,17 @@ line-height: 2rem;
 font-weight: 500; 
 text-align: center; 
 }
+.ask1{
 
+    margin: 50px 0px;
+    padding: 10px;
+    background-color: #009dff;
+    border: solid 1px #009dff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
 .w-80{
     display: flex; 
 padding: 1rem; 
